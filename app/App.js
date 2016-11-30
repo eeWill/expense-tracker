@@ -10,6 +10,8 @@ import { actionCreators } from './reducers/expenses.js'
 import { Input } from './components/Input.js';
 import { Header } from  './components/Header.js';
 
+const baseUrl = "http://localhost:8888/me/server/";
+
 const mapStateToProps = (state) => ({
   expenses: state.expenses,
 })
@@ -18,8 +20,12 @@ class App extends Component {
 
   addExpense = (expense) => {
     const {dispatch} = this.props
-    dispatch(actionCreators.addExpense(expense))
-  }
+    dispatch(actionCreators.addExpense(expense));
+    dispatch(actionCreators.requestExpenses());
+    fetch(baseUrl)
+      .then(response => response.json())
+      .then(json => dispatch(actionCreators.receiveExpenses(json)))
+  };
 
   render () {
     return (
