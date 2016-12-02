@@ -3,6 +3,7 @@ import { call, put } from 'redux-saga/effects';
 import * as actions from '../actions'
 
 let baseUrl = "https://www.evwill.com/";
+let addExpenseUrlString = "expenses.php?action=addExpense&expense=";
 
 export function fetchExpensesApi() {
   return fetch(baseUrl + "expenses.php")
@@ -20,8 +21,8 @@ export function* fetchExpenses() {
 }
 
 export function addExpenseApi(expense) {
-  console.log(baseUrl +  "expenses.php?action=addExpense&expense=" + JSON.stringify(expense));
-  return fetch(baseUrl +  "expenses.php?action=addExpense&expense=" + JSON.stringify(expense))
+  console.log(baseUrl + addExpenseUrlString + JSON.stringify(expense));
+  return fetch(baseUrl + addExpenseUrlString + JSON.stringify(expense))
     .then(response => response.json())
     .catch(error => ({ error }))
 }

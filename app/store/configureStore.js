@@ -11,6 +11,10 @@ if (process.env.NODE_ENV === 'development') {
   middleware.push(createLogger());
 }
 
+let initialState = {
+  expenses: []
+}
+
 //Saga
 let configureStore = (initialState) => {
   const sagaMiddleware = createSagaMiddleware()
