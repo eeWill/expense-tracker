@@ -17,8 +17,9 @@ export const actionCreators = {
   receiveExpenses: (json) => {
     return {
       type: types.RECEIVE_EXPENSES,
-      expenses: json.map(expense => expense.name),
-      receivedAt: Date.now()
+      expenses: json.map(expense => { 
+        return {...expense}
+      })
     }
   },
 };
