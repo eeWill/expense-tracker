@@ -1,25 +1,23 @@
-const types = {
-  ADD_EXPENSE: 'ADD_EXPENSE',
-  REQUEST_EXPENSES: 'REQUEST_EXPENSES',
-  RECEIVE_EXPENSES: 'RECEIVE_EXPENSES',
-  FETCH_EXPENSES: 'FETCH_EXPENSES'
-}
+import {
+  REQUEST_EXPENSES,
+  RECEIVE_EXPENSES,
+  FETCH_EXPENSES,
+  ADD_EXPENSE
+} from '../actions'
 
 export const actionCreators = {
   addExpense: (expense) => {
-    return {type: types.ADD_EXPENSE, payload: expense}
+    return {type: ADD_EXPENSE, payload: expense}
   },
   requestExpenses: (dispatch) => {
     return {
-      type: types.REQUEST_EXPENSES
+      type: REQUEST_EXPENSES
     }
   },
-  receiveExpenses: (json) => {
+  receiveExpenses: (expenses) => {
     return {
-      type: types.RECEIVE_EXPENSES,
-      expenses: json.map(expense => { 
-        return {...expense}
-      })
+      type: RECEIVE_EXPENSES,
+      expenses
     }
   },
 };
@@ -33,20 +31,20 @@ export const reducer = (state = initialState, action) => {
   const {expenses} = state
 
   switch(type) {
-    case types.ADD_EXPENSE: {
+    case ADD_EXPENSE: {
       return {
         ...state,
-        expenses: [{label: payload}, ...expenses],
+        expenses: [payload, ...expenses],
       }
     }
-    case types.RECEIVE_EXPENSES: {
+    case RECEIVE_EXPENSES: {
       return {
         ...state,
         expenses: action.expenses,
         lastUpdated: action.receivedAt
       }
     }
-    case types.REQUEST_EXPENSES: {
+    case REQUEST_EXPENSES: {
       return state;
     }
     default: {

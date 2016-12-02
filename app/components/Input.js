@@ -33,6 +33,7 @@ class Input extends Component {
           />
           <TextInput
             placeholder="Price"
+            keyboardType="numeric"
             onChangeText={(price) => this.setState({price})}
             style={styles.input}
             value={price}

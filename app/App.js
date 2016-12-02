@@ -3,14 +3,14 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ToastAndroid
 } from 'react-native';
 import { connect } from 'react-redux'
 import { actionCreators } from './reducers/expenses.js'
+import * as actions from './actions'
 import { Input } from './components/Input.js';
 import { Header } from  './components/Header.js';
-
-const baseUrl = "https://evwill.com/expenses.php/";
 
 const mapStateToProps = (state) => ({
   expenses: state.expenses,
@@ -20,16 +20,7 @@ class App extends Component {
 
   addExpense = (expense) => {
     const {dispatch} = this.props
-    dispatch(actionCreators.addExpense(expense));
-    fetch(baseUrl + "?action=addExpense&expense=" + JSON.stringify(expense))
-    .then((response) => {
-      console.log(response);
-      response.json()
-    })
-    .then(json => dispatch(actionCreators.receiveExpenses(json)))
-    .catch(function(error) {
-        console.log(error);
-    });;
+    dispatch(actions.fetchExpenses());
   };
 
   render () {
