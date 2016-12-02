@@ -18,9 +18,14 @@ const mapStateToProps = (state) => ({
 
 class App extends Component {
 
-  addExpense = (expense) => {
+  fetchExpenses = () => {
     const {dispatch} = this.props
     dispatch(actions.fetchExpenses());
+  }
+
+  addExpense = (expense) => {
+    const {dispatch} = this.props
+    dispatch(actions.addExpenseRequest(expense));
   };
 
   render () {
