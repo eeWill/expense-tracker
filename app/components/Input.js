@@ -46,7 +46,6 @@ class Input extends Component {
             <Picker.Item label="Misc" value="misc" />
             <Picker.Item label="Transportation" value="transportation" />
             <Picker.Item label="Coffee" value="coffee" />
-            <Picker.Item label="Alcohol" value="alcohol" />
             <Picker.Item label="Rent/Utilities" value="rent" />
             <Picker.Item label="Loan" value="loan" />
           </Picker>

@@ -3,6 +3,7 @@ export const ADD_EXPENSE_REQUEST = 'ADD_EXPENSE_REQUEST'
 export const REQUEST_EXPENSES = 'REQUEST_EXPENSES';
 export const RECEIVE_EXPENSES = 'RECEIVE_EXPENSES';
 export const FETCH_EXPENSES = 'FETCH_EXPENSES';
+export const ADD_EXPENSE_COMPLETED = 'ADD_EXPENSE_COMPLETED'
 
 export function addExpense(expense) {
   return {
@@ -28,6 +29,13 @@ export function receiveExpenses(expenses) {
   return {
     type: RECEIVE_EXPENSES,
     expenses
+  }
+}
+
+export function addExpenseCompleted(payload) {
+  return {
+    type: ADD_EXPENSE_COMPLETED,
+    payload
   }
 }
 

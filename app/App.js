@@ -6,7 +6,7 @@ import {
   View,
   Navigator,
   ToastAndroid,
-  Button
+  Button,
 } from 'react-native';
 import { connect } from 'react-redux'
 import { actionCreators } from './reducers/expenses.js'
@@ -17,6 +17,7 @@ import { ExpenseList } from './components/ExpenseList.js';
 
 const mapStateToProps = (state) => ({
   expenses: state.expenses,
+  error: state.error
 });
 
 class App extends Component {
@@ -65,6 +66,7 @@ class App extends Component {
           <View style={styles.content}>
             <Input addExpense={this.addExpense}/>
           </View>
+          <Text>{this.props.error}</Text>
         </View>
       );
     }
@@ -93,7 +95,7 @@ class App extends Component {
           if (route.sceneConfig) {
             return route.sceneConfig;
           }
-          return Navigator.SceneConfigs.VerticalDownSwipeJump;
+          return Navigator.SceneConfigs.FloatFromRight;
       }}/>
     )   
   }

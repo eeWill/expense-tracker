@@ -28,5 +28,4 @@ let configureStore = (initialState) => {
   return store;
 }
 
-
 export {configureStore}

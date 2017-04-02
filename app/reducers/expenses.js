@@ -2,7 +2,8 @@ import {
   REQUEST_EXPENSES,
   RECEIVE_EXPENSES,
   FETCH_EXPENSES,
-  ADD_EXPENSE
+  ADD_EXPENSE,
+  ADD_EXPENSE_COMPLETED
 } from '../actions'
 
 export const actionCreators = {
@@ -24,6 +25,7 @@ export const actionCreators = {
 
 const initialState = {
   expenses: [],
+  error: ""
 }
 
 export const reducer = (state = initialState, action) => {
@@ -42,6 +44,18 @@ export const reducer = (state = initialState, action) => {
         ...state,
         expenses: action.expenses,
         lastUpdated: action.receivedAt
+      }
+    }
+    case ADD_EXPENSE_COMPLETED: {
+      let error;
+      if(action.payload == 404) {
+        error = "There was a problem adding expense, please try again";
+      } else {
+        error = "Item added successfully."
+      }
+      return {
+        ...state,
+        error
       }
     }
     case REQUEST_EXPENSES: {
