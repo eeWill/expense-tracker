@@ -5,8 +5,8 @@ import {
   Text,
   View,
   Navigator,
-  ToastAndroid,
   Button,
+  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux'
 import { actionCreators } from './reducers/expenses.js'
@@ -15,9 +15,11 @@ import { Input } from './components/Input.js';
 import { Header } from  './components/Header.js';
 import { ExpenseList } from './components/ExpenseList.js';
 
+
 const mapStateToProps = (state) => ({
   expenses: state.expenses,
-  error: state.error
+  error: state.error,
+  showMessage: state.showMessage,
 });
 
 class App extends Component {
@@ -39,6 +41,11 @@ class App extends Component {
   addExpense = (expense) => {
     const {dispatch} = this.props;
     dispatch(actions.addExpenseRequest(expense));
+  }
+
+  hideNotification = () => {
+    const {dispatch} = this.props;
+    dispatch(actions.hideNotification());
   }
   
   changePage = (navigator, pageId) => {
@@ -66,7 +73,12 @@ class App extends Component {
           <View style={styles.content}>
             <Input addExpense={this.addExpense}/>
           </View>
-          <Text>{this.props.error}</Text>
+          {this.props.showMessage &&
+          <TouchableHighlight onPress={() => this.hideNotification()}>
+            <View style={styles.notificationContainer}>
+              <Text style={styles.notificationText}>{this.props.error}</Text>
+            </View>
+          </TouchableHighlight>}
         </View>
       );
     }
@@ -125,5 +137,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     flexDirection: 'row', 
     justifyContent:'center'
+  },
+  notificationContainer: {
+    justifyContent:'center',
+    padding: 5,
+    backgroundColor: '#008F00',
+  },
+  notificationText: {
+    color: 'white',
+    textAlign: 'center'
   }
 });

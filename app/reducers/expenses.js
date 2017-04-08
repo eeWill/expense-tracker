@@ -3,7 +3,8 @@ import {
   RECEIVE_EXPENSES,
   FETCH_EXPENSES,
   ADD_EXPENSE,
-  ADD_EXPENSE_COMPLETED
+  ADD_EXPENSE_COMPLETED,
+  HIDE_NOTIFICATION
 } from '../actions'
 
 export const actionCreators = {
@@ -53,13 +54,21 @@ export const reducer = (state = initialState, action) => {
       } else {
         error = "Item added successfully."
       }
+      showMessage = true;
       return {
         ...state,
-        error
+        error,
+        showMessage
       }
     }
     case REQUEST_EXPENSES: {
       return state;
+    }
+    case HIDE_NOTIFICATION: {
+      return {
+        ...state,
+        showMessage: false
+      }
     }
     default: {
       return state

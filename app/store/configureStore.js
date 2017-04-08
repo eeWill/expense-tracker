@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 let initialState = {
-  expenses: []
+  expenses: [],
 }
 
 //Saga
