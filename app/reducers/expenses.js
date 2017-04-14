@@ -49,16 +49,15 @@ export const reducer = (state = initialState, action) => {
     }
     case ADD_EXPENSE_COMPLETED: {
       let error;
-      if(action.payload == 404) {
+      if((action.payload == 404)||(action.payload == 500)) {
         error = "There was a problem adding expense, please try again";
       } else {
         error = "Item added successfully."
       }
-      showMessage = true;
       return {
         ...state,
         error,
-        showMessage
+        showMessage: true
       }
     }
     case REQUEST_EXPENSES: {

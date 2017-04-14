@@ -40,18 +40,12 @@
 	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>evwill.com</key>
-			<dict/>
 			<key>NSExceptionAllowsInsecureHTTPLoads</key>
 			<true/>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+			<key>NSIncludesSubdomains</key>
+			<true/>
 	</dict>
 </dict>
 </plist>

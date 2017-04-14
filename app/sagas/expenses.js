@@ -20,6 +20,7 @@ export function* fetchExpenses() {
   yield put(actions.receiveExpenses(expenses))
 }
 
+/*
 export function addExpenseApi(expense) {
   return fetch(baseUrl + addExpenseUrlString + JSON.stringify(expense))
     .then(response => {
@@ -31,6 +32,36 @@ export function addExpenseApi(expense) {
     })
     .catch(error => error);
 }
+*/
+
+export function addExpenseApi() {
+  let expense = {
+    name: "Tacos",
+    cost: "9.00",
+    user_id: 1,
+    category_id: 1,
+    company_id: 1,
+    purchase_date: "2016-06-04 11:31:02"
+  }
+  return fetch("https://forte.evwill.com/expenses", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(expense)
+  })
+  .then(response => {
+    console.log(response);
+    if(response.status === 404) {
+      return response.status;
+    } else {
+      console.log(response);
+      return response.json();
+    }
+  })
+  .catch(error => error);
+}
 
 export function* addExpense(action) {
   /*
@@ -40,6 +71,7 @@ export function* addExpense(action) {
    yield put(actions.addExpense(action.payload));
    try {
       const data = yield call(addExpenseApi, action.payload);
+      console.log(data);
       yield put({type: "ADD_EXPENSE_COMPLETED", payload: data})
    } catch (error) {
       console.log(error);
