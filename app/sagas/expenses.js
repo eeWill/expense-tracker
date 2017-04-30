@@ -2,13 +2,13 @@ import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as actions from '../actions'
 
-let baseUrl = "https://www.evwill.com/";
-let addExpenseUrlString = "expenses.php?action=addExpense&expense=";
+let baseUrl = "https://forte.evwill.com";
 
 export function fetchExpensesApi() {
-  return fetch(baseUrl + "expenses.php")
+  return fetch(baseUrl + "/expenses")
     .then(response => response.json())
-    .then(json => json.map(expense => { 
+    .then(json => json.data.map(expense => {
+      console.log(expense);
       return {...expense}
     }))
     .catch(error => ({ error }))
@@ -43,7 +43,7 @@ export function addExpenseApi() {
     company_id: 1,
     purchase_date: "2016-06-04 11:31:02"
   }
-  return fetch("https://forte.evwill.com/expenses", {
+  return fetch(baseUrl + "/expenses", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
