@@ -34,22 +34,24 @@ export function addExpenseApi(expense) {
 }
 */
 
-export function addExpenseApi() {
-  let expense = {
-    name: "Tacos",
-    cost: "9.00",
+export function addExpenseApi(expense) {
+
+  let theExpense = { 
+    name: expense.name,
+    cost: expense.price,
     user_id: 1,
     category_id: 1,
-    company_id: 1,
+    company_id: 1, 
     purchase_date: "2016-06-04 11:31:02"
   }
+  
   return fetch(baseUrl + "/expenses", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(expense)
+    body: JSON.stringify(theExpense)
   })
   .then(response => {
     console.log(response);
