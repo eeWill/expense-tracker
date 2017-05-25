@@ -1,11 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { reducer } from '../reducers/expenses';
 import createSagaMiddleware from 'redux-saga';
 import { mySaga } from '../sagas/expenses.js';
+import AppReducer from '../reducers';
 
-const middleware = [ thunk ];
+const middleware = [];
 
 if (process.env.NODE_ENV === 'development') {
   middleware.push(createLogger());
@@ -20,7 +19,7 @@ let configureStore = (initialState) => {
   const sagaMiddleware = createSagaMiddleware()
   middleware.push(sagaMiddleware);
   const store = createStore(
-    reducer,
+    AppReducer,
     initialState,
     applyMiddleware(...middleware),
   );

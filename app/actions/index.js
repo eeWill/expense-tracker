@@ -5,6 +5,8 @@ export const RECEIVE_EXPENSES = 'RECEIVE_EXPENSES';
 export const FETCH_EXPENSES = 'FETCH_EXPENSES';
 export const ADD_EXPENSE_COMPLETED = 'ADD_EXPENSE_COMPLETED';
 export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 
 export function addExpense(expense) {
   return {
@@ -49,5 +51,18 @@ export function fetchExpenses() {
 export function hideNotification() {
   return {
     type: HIDE_NOTIFICATION
+  }
+}
+
+export function fetchCategories() {
+  return {
+    type: FETCH_CATEGORIES
+  }
+}
+
+export function receiveCategories(categories) {
+  return {
+    type: RECEIVE_CATEGORIES,
+    categories
   }
 }

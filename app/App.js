@@ -14,13 +14,29 @@ import * as actions from './actions'
 import { Input } from './components/Input.js';
 import { Header } from  './components/Header.js';
 import { ExpenseList } from './components/ExpenseList.js';
-
+import { addNavigationHelpers } from 'react-navigation';
 
 const mapStateToProps = (state) => ({
   expenses: state.expenses,
   error: state.error,
   showMessage: state.showMessage,
 });
+
+const AppNavigator = StackNavigator(AppRouteConfigs);
+
+const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('HomeScreen'));
+
+const navReducer = (state = initialState, action) => {
+  const nextState = AppNavigator.router.getStateForAction(action, state);
+
+  return nextState || state;
+};
+
+const appReducer = combineReducers({
+  nav: navReducer,
+  ...
+});
+
 
 class App extends Component {
 
@@ -82,35 +98,7 @@ class App extends Component {
         </View>
       );
     }
-    if (routeId === 'ExpenseListPage') {
-        return (
-          <View style={styles.container} >
-            <Button
-              onPress={() => this.changePage(navigator, "AddExpensePage")}
-              title="Back"
-              accessibilityLabel="View Expenses"
-            />
-            <ExpenseList expenses={this.props.expenses} />
-          </View>
-        );
-    }
 }
-
-
-  render () {
-    
-    return (
-      <Navigator
-        initialRoute={{id: 'AddExpensePage', name: 'Add Expense'}}
-        renderScene={this.renderScene.bind(this)}
-        configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig;
-          }
-          return Navigator.SceneConfigs.FloatFromRight;
-      }}/>
-    )   
-  }
 }
 
 export default connect(mapStateToProps)(App);

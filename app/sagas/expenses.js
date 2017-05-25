@@ -8,7 +8,6 @@ export function fetchExpensesApi() {
   return fetch(baseUrl + "/expenses")
     .then(response => response.json())
     .then(json => json.data.map(expense => {
-      console.log(expense);
       return {...expense}
     }))
     .catch(error => ({ error }))
@@ -66,10 +65,6 @@ export function addExpenseApi(expense) {
 }
 
 export function* addExpense(action) {
-  /*
-  yield put(actions.addExpense(action.payload));
-  yield call(addExpenseApi, action.payload);
-  */
    yield put(actions.addExpense(action.payload));
    try {
       const data = yield call(addExpenseApi, action.payload);
@@ -80,9 +75,6 @@ export function* addExpense(action) {
       yield call({type: "ADD_EXPENSE_FAILURE", error});
    }
 }
-
-
-
 
 export function* mySaga() {
   yield takeEvery("FETCH_EXPENSES", fetchExpenses);

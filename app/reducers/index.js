@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   REQUEST_EXPENSES,
   RECEIVE_EXPENSES,
@@ -6,6 +7,16 @@ import {
   ADD_EXPENSE_COMPLETED,
   HIDE_NOTIFICATION
 } from '../actions'
+
+import { AppNavigator } from '../navigators/AppNavigator';
+
+const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Index'));
+
+function nav(state = initialNavState, action) {
+  const nextState = AppNavigator.router.getStateForAction(action, state);
+  return nextState || state;
+}
+
 
 export const actionCreators = {
   addExpense: (expense) => {
@@ -29,7 +40,7 @@ const initialState = {
   error: ""
 }
 
-export const reducer = (state = initialState, action) => {
+export const app = (state = initialState, action) => {
   const {type, payload} = action
   const {expenses} = state
 
@@ -74,3 +85,10 @@ export const reducer = (state = initialState, action) => {
     }
   }
 }
+
+const AppReducer = combineReducers({
+  nav,
+  app
+});
+
+export default AppReducer;

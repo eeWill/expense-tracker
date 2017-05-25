@@ -1,34 +1,27 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ListView } from 'react-native'
+import { Text, View, StyleSheet, FlatList, Button } from 'react-native'
 
 class ExpenseList extends Component {
 
+    keyExtractor = (expense, index) => expense.id;
+
+    renderItem = ({item}) => (
+      <Text>{item.name}</Text>
+    );
+
     render () {
         let {expenses} = this.props;
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        let data = ds.cloneWithRows(expenses)
-
         return (
-          <View style={{flex: 1, paddingTop: 4}}>
-            <ListView
-              dataSource={data}
-              renderRow={(expense) =>
-                <View style={styles.row}>
-                  <View style={{flex: 1, }}>
-                    <Text>{expense.name}</Text>
-                  </View>
-                  <View style={{flex:1}}>
-                    <Text>{expense.price}</Text>
-                  </View>
-                </View> 
-              }
-            />
-          </View>
+          <FlatList
+            data={expenses}
+            keyExtractor={this.keyExtractor}
+            renderItem={this.renderItem}
+          />
         )
     }
 }
 
-export {ExpenseList}
+export default ExpenseList;
 
 const styles = StyleSheet.create({
   row: {
