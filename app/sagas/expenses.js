@@ -13,25 +13,26 @@ export function fetchExpensesApi() {
     .catch(error => ({ error }))
 }
 
+export function fetchCategoriesApi() {
+  return fetch(baseUrl + "/categories")
+    .then(response => response.json())
+    .then(json => json.data.map(category => {
+      return {...category}
+    }))
+    .catch(error => ({ error }))
+}
+
 export function* fetchExpenses() {
   yield put(actions.requestExpenses());
   const expenses = yield call(fetchExpensesApi);
   yield put(actions.receiveExpenses(expenses))
 }
 
-/*
-export function addExpenseApi(expense) {
-  return fetch(baseUrl + addExpenseUrlString + JSON.stringify(expense))
-    .then(response => {
-      if(response.status === 404) {
-        return response.status;
-      } else {
-        return response.json();
-      }
-    })
-    .catch(error => error);
+export function* fetchCategories() {
+  yield put(actions.requestCategories());
+  const categories = yield call(fetchCategoriesApi);
+  yield put(actions.receiveCategories(categories));
 }
-*/
 
 export function addExpenseApi(expense) {
 
@@ -79,6 +80,7 @@ export function* addExpense(action) {
 export function* mySaga() {
   yield takeEvery("FETCH_EXPENSES", fetchExpenses);
   yield takeEvery("ADD_EXPENSE_REQUEST", addExpense);
+  yield takeEvery("FETCH_CATEGORIES", fetchCategories);
 }
 
 

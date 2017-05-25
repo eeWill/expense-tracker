@@ -5,7 +5,8 @@ import {
   FETCH_EXPENSES,
   ADD_EXPENSE,
   ADD_EXPENSE_COMPLETED,
-  HIDE_NOTIFICATION
+  HIDE_NOTIFICATION,
+  RECEIVE_CATEGORIES
 } from '../actions'
 
 import { AppNavigator } from '../navigators/AppNavigator';
@@ -17,28 +18,7 @@ function nav(state = initialNavState, action) {
   return nextState || state;
 }
 
-
-export const actionCreators = {
-  addExpense: (expense) => {
-    return {type: ADD_EXPENSE, payload: expense}
-  },
-  requestExpenses: (dispatch) => {
-    return {
-      type: REQUEST_EXPENSES
-    }
-  },
-  receiveExpenses: (expenses) => {
-    return {
-      type: RECEIVE_EXPENSES,
-      expenses
-    }
-  },
-};
-
-const initialState = {
-  expenses: [],
-  error: ""
-}
+const initialState = []
 
 export const app = (state = initialState, action) => {
   const {type, payload} = action
@@ -78,6 +58,12 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         showMessage: false
+      }
+    }
+    case RECEIVE_CATEGORIES: {
+      return {
+        ...state,
+        categories: action.categories
       }
     }
     default: {

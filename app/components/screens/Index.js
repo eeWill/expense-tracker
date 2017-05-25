@@ -12,15 +12,10 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    const { fetchExpenses } = this.props;
-    fetchExpenses();
+    const { fetchServerData } = this.props;
+    fetchServerData();
   }
-
-  addExpense = (expense) => {
-    const {dispatch} = this.props;
-    dispatch(actions.addExpenseRequest(expense));
-  }
-
+  
   hideNotification = () => {
     const {dispatch} = this.props;
     dispatch(actions.hideNotification());
@@ -66,9 +61,10 @@ const mapDispatchToProps = (dispatch) => ({
   goTo: (route) => {
     dispatch(NavigationActions.navigate({ routeName: route }));
   },
-  fetchExpenses: () => {
+  fetchServerData: () => {
     dispatch(actions.fetchExpenses());
-  }
+    dispatch(actions.fetchCategories());
+  },
 });
 
 export default connect(null, mapDispatchToProps)(Index);
