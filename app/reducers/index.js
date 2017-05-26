@@ -6,7 +6,10 @@ import {
   ADD_EXPENSE,
   ADD_EXPENSE_COMPLETED,
   HIDE_NOTIFICATION,
-  RECEIVE_CATEGORIES
+  RECEIVE_CATEGORIES,
+  UPDATE_NEW_EXPENSE_NAME,
+  UPDATE_NEW_EXPENSE_CATEGORY,
+  UPDATE_NEW_EXPENSE_COST
 } from '../actions'
 
 import { AppNavigator } from '../navigators/AppNavigator';
@@ -72,9 +75,44 @@ export const app = (state = initialState, action) => {
   }
 }
 
+initialInputState = {
+  expenseName: '',
+  expenseCategory: 5,
+  expenseCost: ''
+}
+
+export const input = (state = initialInputState, action) => {
+  const {type, payload} = action
+
+  switch(type) {
+    case UPDATE_NEW_EXPENSE_NAME: {
+      return {
+        ...state,
+        expenseName: action.name,
+      }
+    }
+    case UPDATE_NEW_EXPENSE_CATEGORY: {
+      return {
+        ...state,
+        expenseCategory: action.category,
+      }
+    }
+    case UPDATE_NEW_EXPENSE_COST: {
+      return {
+        ...state,
+        expenseCost: action.cost,
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}
+
 const AppReducer = combineReducers({
   nav,
-  app
+  app,
+  input
 });
 
 export default AppReducer;

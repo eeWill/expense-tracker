@@ -8,6 +8,9 @@ export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
+export const UPDATE_NEW_EXPENSE_NAME = 'UPDATE_NEW_EXPENSE_NAME';
+export const UPDATE_NEW_EXPENSE_CATEGORY = 'UPDATE_NEW_EXPENSE_CATEGORY';
+export const UPDATE_NEW_EXPENSE_COST = 'UPDATE_NEW_EXPENSE_COST';
 
 export function addExpense(expense) {
   return {
@@ -72,5 +75,26 @@ export function receiveCategories(categories) {
   return {
     type: RECEIVE_CATEGORIES,
     categories
+  }
+}
+
+export function updateNewExpenseCategory(category) {
+  return {
+    type: UPDATE_NEW_EXPENSE_CATEGORY,
+    category
+  }
+}
+
+export function updateNewExpenseName(name) {
+  return {
+    type: UPDATE_NEW_EXPENSE_NAME,
+    name
+  }
+}
+
+export function updateNewExpenseCost(cost) {
+  return {
+    type: UPDATE_NEW_EXPENSE_COST,
+    cost
   }
 }

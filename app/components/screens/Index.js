@@ -4,6 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import * as actions from './../../actions'
 import { NavigationActions } from 'react-navigation';
+import Input from './../Input';
 
 class Index extends Component {
 
@@ -15,7 +16,7 @@ class Index extends Component {
     const { fetchServerData } = this.props;
     fetchServerData();
   }
-  
+
   hideNotification = () => {
     const {dispatch} = this.props;
     dispatch(actions.hideNotification());
@@ -39,7 +40,7 @@ class Index extends Component {
     const { goTo } = this.props;
     return (
       <View>
-        <Text>Index Screen!</Text>
+        <Input />
         <Button onPress={() => goTo('Expenses')} title="Expenses"/>
         <Button onPress={() => goTo('Categories')} title="Categories"/>
       </View>

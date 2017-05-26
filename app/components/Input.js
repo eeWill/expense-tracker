@@ -1,56 +1,49 @@
 import React, { Component } from 'react'
 import { TextInput, View, StyleSheet, Button, Picker } from 'react-native'
+import { connect } from 'react-redux';
+import * as actions from './../actions';
+import moment from 'moment';
 
 class Input extends Component {
 
-  state = {
-    name: '',
-    price: '',
-    category: 'food'
-  }
-
   addExpense = () => {
-    this.props.addExpense({
-      name: this.state.name,
-      price: this.state.price,
-      category: this.state.category,
-      insertTime: Date.now()
+    const { input, addExpense } = this.props;
+    addExpense({
+      name: input.expenseName,
+      price: input.expenseCost,
+      category: input.expenseCategory,
+      purchaseDate: moment().format('YYYY-MM-DD HH:mm:ss')
     });
   }
 
   render () {
-    const {name} = this.state;
-    const {price} = this.state;
-    const {category} = this.state;
+    const { updateCategory, updateName, updateCost } = this.props;
+    const input = this.props;
+    const categories = this.props.categories || [];
+    let categoryTypes = [{label: "None", value: 0}];
+    categories.forEach((category) => categoryTypes.push({label: category.name, value: category.id}));
 
     return (
         <View>
           <TextInput
             placeholder="Expense"
-            onChangeText={(name) => this.setState({name})}
+            onChangeText={(name) => updateName(name)}
             style={styles.input}
-            value={name}
           />
           <TextInput
-            placeholder="Price"
+            placeholder="Cost"
             keyboardType="numeric"
-            onChangeText={(price) => this.setState({price})}
+            onChangeText={(cost) => updateCost(cost)}
             style={styles.input}
-            value={price}
           />
           <Picker
             itemStyle={styles.picker}
-            selectedValue={category}
-            onValueChange={(category) => this.setState({category: category})}>
-            <Picker.Item label="Food" value="food" />
-            <Picker.Item label="Misc" value="misc" />
-            <Picker.Item label="Transportation" value="transportation" />
-            <Picker.Item label="Coffee" value="coffee" />
-            <Picker.Item label="Rent/Utilities" value="rent" />
-            <Picker.Item label="Loan" value="loan" />
+            selectedValue={this.props.input.expenseCategory}
+            onValueChange={(category) => updateCategory(category)}>
+            {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
           </Picker>
           <Button
-            onPress={this.addExpense}
+            onPress={() => this.addExpense()}
             title="Add Expense"
             accessibilityLabel="Add Expense"
           />
@@ -59,7 +52,30 @@ class Input extends Component {
   }
 }
 
-export {Input}
+const mapStateToProps = (state) => ({
+  categories: state.app.categories,
+  input: state.input,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  goTo: (route) => {
+    dispatch(NavigationActions.navigate({ routeName: route }));
+  },
+  updateName: (name) => {
+    dispatch(actions.updateNewExpenseName(name));
+  },
+  updateCost: (cost) => {
+    dispatch(actions.updateNewExpenseCost(cost));
+  },
+  updateCategory: (category) => {
+    dispatch(actions.updateNewExpenseCategory(category));
+  },
+  addExpense: (expense) => {
+    dispatch(actions.addExpenseRequest(expense));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Input);
 
 const styles = StyleSheet.create({
   input: {

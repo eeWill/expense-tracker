@@ -54,11 +54,6 @@ class App extends Component {
     dispatch(actions.fetchExpenses());
   }
 
-  addExpense = (expense) => {
-    const {dispatch} = this.props;
-    dispatch(actions.addExpenseRequest(expense));
-  }
-
   hideNotification = () => {
     const {dispatch} = this.props;
     dispatch(actions.hideNotification());

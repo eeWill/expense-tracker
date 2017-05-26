@@ -40,9 +40,9 @@ export function addExpenseApi(expense) {
     name: expense.name,
     cost: expense.price,
     user_id: 1,
-    category_id: 1,
+    category_id: expense.category,
     company_id: 1, 
-    purchase_date: "2016-06-04 11:31:02"
+    purchase_date: expense.purchaseDate
   }
   
   return fetch(baseUrl + "/expenses", {

@@ -3,12 +3,16 @@ import { Text, View, StyleSheet, ScrollView, TouchableHighlight, BackAndroid } f
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux'
 import ExpenseList from './../ExpenseList';
-
+import Input from './../Input';
 
 class Expenses extends Component {
   render() {
     const { expenses } = this.props;
-    return <ExpenseList expenses={expenses} />
+    return (
+      <View>
+        <ExpenseList expenses={expenses} />
+      </View>
+    )
   }
 }
 
