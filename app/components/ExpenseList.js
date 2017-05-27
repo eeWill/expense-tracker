@@ -6,7 +6,10 @@ class ExpenseList extends Component {
     keyExtractor = (expense, index) => expense.id;
 
     renderItem = ({item}) => (
-      <Text>{item.name}</Text>
+      <View style={styles.row}>
+        <Text style={styles.expenseName}>{item.name}</Text>
+        <Text>${item.cost}</Text>
+      </View>
     );
 
     render () {
@@ -27,7 +30,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1, 
-    borderColor: '#000',
-    padding: 5
+    borderColor: '#d2d2d2',
+    padding: 15,
+  },
+  expenseName: {
+    width: 250
   }
 });

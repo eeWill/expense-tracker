@@ -9,7 +9,9 @@ class Categories extends Component {
   keyExtractor = (category, index) => category.id;
 
   renderItem = ({item}) => (
-    <Text>{item.name}</Text>
+    <View style={styles.row}>
+      <Text style={styles.expenseCategory}>{item.name}</Text>
+    </View>
   );
 
   render() {
@@ -27,12 +29,22 @@ class Categories extends Component {
 
 Categories.navigationOptions = ({ navigation }) => {
   return {
-    title: navigation.pageTitle,
+    title: "Categories",
   }
 }
 
 const mapStateToProps = (state) => ({
   categories: state.app.categories,
+});
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    borderBottomWidth: 1, 
+    borderColor: '#d2d2d2',
+    padding: 15,
+    justifyContent: 'center'
+  },
 });
 
 

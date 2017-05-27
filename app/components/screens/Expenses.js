@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ScrollView, TouchableHighlight, BackAndroid } from 'react-native'
+import { Text, View, StyleSheet, TouchableHighlight, BackAndroid } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux'
 import ExpenseList from './../ExpenseList';
@@ -18,7 +18,7 @@ class Expenses extends Component {
 
 Expenses.navigationOptions = ({ navigation }) => {
   return {
-    title: navigation.pageTitle,
+    title: "Expenses",
   }
 }
 

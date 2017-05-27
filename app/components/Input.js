@@ -20,7 +20,7 @@ class Input extends Component {
     const { updateCategory, updateName, updateCost } = this.props;
     const input = this.props;
     const categories = this.props.categories || [];
-    let categoryTypes = [{label: "None", value: 0}];
+    let categoryTypes = [{label: "Select Category", value: 0}];
     categories.forEach((category) => categoryTypes.push({label: category.name, value: category.id}));
 
     return (
@@ -42,11 +42,13 @@ class Input extends Component {
             onValueChange={(category) => updateCategory(category)}>
             {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
           </Picker>
-          <Button
-            onPress={() => this.addExpense()}
-            title="Add Expense"
-            accessibilityLabel="Add Expense"
-          />
+          <View style={{padding: 50}}>
+            <Button
+              onPress={() => this.addExpense()}
+              title="Submit Expense"
+              accessibilityLabel="Submit Expense"
+            />
+          </View>
         </View>
     )
   }
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
   picker: {
-    color: '#000'
+    color: '#000',
+    width: 200
   }
 });

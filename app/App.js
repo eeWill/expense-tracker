@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   content: {
-    flex: 9, 
     backgroundColor: '#F0F8FF', 
     alignItems: 'center', 
     flexDirection: 'row', 
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
   },
   notificationContainer: {
     justifyContent:'center',
-    padding: 5,
+    padding: 10,
     backgroundColor: '#008F00',
   },
   notificationText: {

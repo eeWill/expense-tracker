@@ -7,6 +7,7 @@ import {
   ADD_EXPENSE_COMPLETED,
   HIDE_NOTIFICATION,
   RECEIVE_CATEGORIES,
+  REQUEST_CATEGORIES,
   UPDATE_NEW_EXPENSE_NAME,
   UPDATE_NEW_EXPENSE_CATEGORY,
   UPDATE_NEW_EXPENSE_COST
@@ -21,7 +22,9 @@ function nav(state = initialNavState, action) {
   return nextState || state;
 }
 
-const initialState = []
+const initialState = {
+  isFetching: false
+}
 
 export const app = (state = initialState, action) => {
   const {type, payload} = action
@@ -31,7 +34,8 @@ export const app = (state = initialState, action) => {
     case ADD_EXPENSE: {
       return {
         ...state,
-        expenses: [payload, ...expenses],
+        isFetching: true,
+        expenses: [payload, ...expenses]
       }
     }
     case RECEIVE_EXPENSES: {
@@ -51,11 +55,19 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         error,
-        showMessage: true
+        showMessage: true,
+        isFetching: false
       }
     }
     case REQUEST_EXPENSES: {
-      return state;
+      return {
+        ...state
+      }
+    }
+    case REQUEST_CATEGORIES: {
+      return {
+        ...state
+      }
     }
     case HIDE_NOTIFICATION: {
       return {
@@ -66,7 +78,7 @@ export const app = (state = initialState, action) => {
     case RECEIVE_CATEGORIES: {
       return {
         ...state,
-        categories: action.categories
+        categories: action.categories,
       }
     }
     default: {
@@ -77,7 +89,7 @@ export const app = (state = initialState, action) => {
 
 initialInputState = {
   expenseName: '',
-  expenseCategory: 5,
+  expenseCategory: 0,
   expenseCost: ''
 }
 
