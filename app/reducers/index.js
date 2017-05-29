@@ -10,7 +10,8 @@ import {
   REQUEST_CATEGORIES,
   UPDATE_NEW_EXPENSE_NAME,
   UPDATE_NEW_EXPENSE_CATEGORY,
-  UPDATE_NEW_EXPENSE_COST
+  UPDATE_NEW_EXPENSE_COST,
+  SHOW_NOTIFICATION
 } from '../actions'
 
 import { AppNavigator } from '../navigators/AppNavigator';
@@ -80,6 +81,13 @@ export const app = (state = initialState, action) => {
       return {
         ...state,
         showMessage: false
+      }
+    }
+    case SHOW_NOTIFICATION: {
+      return {
+        ...state,
+        showMessage: true,
+        error: action.message
       }
     }
     case RECEIVE_CATEGORIES: {

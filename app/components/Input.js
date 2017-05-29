@@ -6,14 +6,32 @@ import moment from 'moment';
 
 class Input extends Component {
 
-  addExpense = () => {
-    const { input, addExpense } = this.props;
-    addExpense({
-      name: input.expenseName,
-      price: input.expenseCost,
-      category: input.expenseCategory,
-      purchaseDate: moment().format('YYYY-MM-DD HH:mm:ss')
-    });
+  addExpense() {
+    const { input, addExpense, hideNotification } = this.props;
+    if(this.validates(input)) {
+      hideNotification();
+      addExpense({
+        name: input.expenseName,
+        price: input.expenseCost,
+        category: input.expenseCategory,
+        purchaseDate: moment().format('YYYY-MM-DD HH:mm:ss')
+      });
+    }
+  }
+
+  validates(input) {
+    const { showNotification } = this.props;
+    if(input.expenseName.length <= 0) {
+      showNotification('Please enter an expense.');
+      return false;
+    }
+
+    if(input.expenseCost.length <= 0) {
+      showNotification('Please enter the cost.');
+      return false;
+    }
+
+    return true;
   }
 
   render () {
@@ -74,6 +92,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addExpense: (expense) => {
     dispatch(actions.addExpenseRequest(expense));
+  },
+  showNotification: (message) => {
+    dispatch(actions.showNotification(message));
+  },
+  hideNotification: () => {
+    dispatch(actions.hideNotification());
   }
 });
 
