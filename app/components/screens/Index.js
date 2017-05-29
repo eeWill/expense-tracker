@@ -77,7 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-
 const mapStateToProps = (state) => ({
   showMessage: state.app.showMessage,
   error: state.app.error,
