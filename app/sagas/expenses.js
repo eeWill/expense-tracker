@@ -54,11 +54,9 @@ export function addExpenseApi(expense) {
     body: JSON.stringify(theExpense)
   })
   .then(response => {
-    console.log(response);
     if(response.status === 404) {
       return response.status;
     } else {
-      console.log(response);
       return response.json();
     }
   })
@@ -69,7 +67,6 @@ export function* addExpense(action) {
    yield put(actions.addExpense(action.payload));
    try {
       const data = yield call(addExpenseApi, action.payload);
-      console.log(data);
       yield put({type: "ADD_EXPENSE_COMPLETED", payload: data})
    } catch (error) {
       console.log(error);

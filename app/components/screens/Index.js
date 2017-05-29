@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from './../../actions'
 import { NavigationActions } from 'react-navigation';
 import Input from './../Input';
+import moment from 'moment';
 
 class Index extends Component {
 
@@ -32,7 +33,7 @@ class Index extends Component {
   }
 
   render() {
-    const { goTo, hideNotification, isFetching } = this.props;
+    const { goTo, hideNotification, isAddingExpense } = this.props;
     return (
       <View style={styles.pageContainer}>
          {this.props.showMessage &&
@@ -41,21 +42,13 @@ class Index extends Component {
               <Text style={styles.notificationText}>{this.props.error}</Text>
             </View>
           </TouchableHighlight>}
+          {isAddingExpense &&
           <ActivityIndicator
-            animating={isFetching}
             style={[styles.centering, {height: 80}]}
             size="large"
-          />
+          />}
         <View style={styles.content}>
           <Input />
-        </View>
-        <View style={{flexDirection: 'column', justifyContent: 'center', flex: 3}}>
-          <View style={{padding: 50, paddingBottom: 5}}>
-            <Button color="#002366" onPress={() => goTo('Expenses')} title="Expenses"/>
-          </View>
-          <View style={{padding: 50, paddingTop: 5}}>
-            <Button color="#002366" onPress={() => goTo('Categories')} title="Categories"/>
-          </View>
         </View>
       </View>
     )
@@ -88,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   showMessage: state.app.showMessage,
   error: state.app.error,
-  isFetching: state.app.isFetching
+  isAddingExpense: state.app.isAddingExpense
 });
 
 const styles = StyleSheet.create({

@@ -14,7 +14,6 @@ let initialState = {
   expenses: [],
 }
 
-//Saga
 let configureStore = (initialState) => {
   const sagaMiddleware = createSagaMiddleware()
   middleware.push(sagaMiddleware);
