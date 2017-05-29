@@ -77,7 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(NavigationActions.navigate({ routeName: route }));
   },
   fetchServerData: () => {
-    dispatch(actions.fetchExpenses());
     dispatch(actions.fetchCategories());
   },
   hideNotification: () => {

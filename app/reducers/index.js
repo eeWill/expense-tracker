@@ -34,14 +34,14 @@ export const app = (state = initialState, action) => {
     case ADD_EXPENSE: {
       return {
         ...state,
-        isFetching: true,
-        expenses: [payload, ...expenses]
+        isFetching: true
       }
     }
     case RECEIVE_EXPENSES: {
       return {
         ...state,
         expenses: action.expenses,
+        isFetching: false,
         lastUpdated: action.receivedAt
       }
     }
@@ -61,7 +61,14 @@ export const app = (state = initialState, action) => {
     }
     case REQUEST_EXPENSES: {
       return {
-        ...state
+        ...state,
+        isFetching: true,
+      }
+    }
+    case FETCH_EXPENSES: {
+      return {
+        ...state,
+        isFetching: true
       }
     }
     case REQUEST_CATEGORIES: {
