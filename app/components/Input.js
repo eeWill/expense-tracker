@@ -56,11 +56,13 @@ class Input extends Component {
         <View>
           <TextInput
             placeholder="Expense"
+            value={this.props.input.expenseName}
             onChangeText={(name) => updateName(name)}
             style={styles.input}
           />
           <TextInput
             placeholder="Cost"
+            value={this.props.input.expenseCost}
             keyboardType="numeric"
             onChangeText={(cost) => updateCost(cost)}
             style={styles.input}

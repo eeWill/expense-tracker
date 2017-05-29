@@ -65,8 +65,6 @@ export const AppNavigator = StackNavigator({
   }
 }, navigationConfig);
 
-
-
 const AppWithNavigationState = ({ dispatch, nav, pageTitle }) => (
   <AppNavigator navigation={addNavigationHelpers({ 
     dispatch, 
@@ -74,7 +72,6 @@ const AppWithNavigationState = ({ dispatch, nav, pageTitle }) => (
     pageTitle 
   })} />
 );
-
 
 const mapStateToProps = state => ({
   nav: state.nav,

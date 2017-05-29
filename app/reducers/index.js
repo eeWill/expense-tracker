@@ -114,6 +114,14 @@ export const input = (state = initialInputState, action) => {
   const {type, payload} = action
 
   switch(type) {
+    case ADD_EXPENSE_COMPLETED: {
+      return {
+        ...state,
+        expenseName: '',
+        expenseCost: '',
+        expenseCategory: 0
+      }
+    }
     case UPDATE_NEW_EXPENSE_NAME: {
       return {
         ...state,
