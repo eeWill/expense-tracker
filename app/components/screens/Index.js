@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from './../../actions'
 import { NavigationActions } from 'react-navigation';
 import Input from './../Input';
-import moment from 'moment';
+import moment from 'moment'; 
+import { addTimeout } from 'redux-timeout'
 
 class Index extends Component {
 
@@ -14,8 +15,9 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    const { fetchCategories } = this.props;
+    const { fetchCategories, addTimeout, hideNotification } = this.props;
     fetchCategories();
+    addTimeout(3000, actions.ADD_EXPENSE_COMPLETED, hideNotification);  
   }
 
   handleBackPress = () => {
@@ -36,6 +38,7 @@ class Index extends Component {
     const { goTo, hideNotification, isAddingExpense } = this.props;
     return (
       <View style={styles.pageContainer}>
+        <View style={{flex: 2}}>
          {this.props.showMessage &&
           <TouchableHighlight onPress={() => hideNotification()}>
             <View style={styles.notificationContainer}>
@@ -47,6 +50,7 @@ class Index extends Component {
             style={[styles.centering, {height: 80}]}
             size="large"
           />}
+        </View>
         <View style={styles.content}>
           <Input />
         </View>
@@ -74,6 +78,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   hideNotification: () => {
     dispatch(actions.hideNotification());
+  },
+  addTimeout: (timeout, action, fn) => {
+    dispatch(addTimeout(timeout, action, fn))
   }
 });
 
@@ -96,6 +103,7 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
   notificationContainer: {
+    height: 30,
     justifyContent:'center',
     padding: 5,
     backgroundColor: '#008F00',
