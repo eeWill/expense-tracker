@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import { TextInput, View, StyleSheet, Button, Picker } from 'react-native'
+import DatePicker from 'react-native-datepicker'
 import { connect } from 'react-redux';
 import * as actions from './../actions';
 import moment from 'moment';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class Input extends Component {
 
   addExpense() {
     const { input, addExpense, hideNotification } = this.props;
     if(this.validates(input)) {
+      let purchaseDate = moment(input.expenseDate).format('YYYY-MM-DD HH:mm:ss');
       hideNotification();
       addExpense({
         name: input.expenseName,
         price: input.expenseCost,
         category: input.expenseCategory,
-        purchaseDate: moment().format('YYYY-MM-DD HH:mm:ss')
+        purchaseDate: purchaseDate 
       });
     }
   }
@@ -34,8 +37,16 @@ class Input extends Component {
     return true;
   }
 
+  calendarIcon = () => (
+    <MaterialIcons
+      name="date-range"
+      size={35}
+      style={styles.icon}
+    />
+  );
+
   render () {
-    const { updateCategory, updateName, updateCost } = this.props;
+    const { updateCategory, updateName, updateCost, updateDate } = this.props;
     const input = this.props;
     const categories = this.props.categories || [];
     let categoryTypes = [{label: "Select Category", value: 0}];
@@ -60,6 +71,20 @@ class Input extends Component {
             onValueChange={(category) => updateCategory(category)}>
             {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
           </Picker>
+          <DatePicker
+            style={{width: 200}}
+            date={this.props.input.expenseDate}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            iconComponent={this.calendarIcon()}
+            customStyles={{
+  
+            }}
+            onDateChange={(date) => updateDate(date)}
+          />          
           <View style={{padding: 50}}>
             <Button
               onPress={() => this.addExpense()}
@@ -90,6 +115,9 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategory: (category) => {
     dispatch(actions.updateNewExpenseCategory(category));
   },
+  updateDate: (date) => {
+    dispatch(actions.updateNewExpenseDate(date));
+  },
   addExpense: (expense) => {
     dispatch(actions.addExpenseRequest(expense));
   },
@@ -98,7 +126,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   hideNotification: () => {
     dispatch(actions.hideNotification());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
@@ -113,5 +141,10 @@ const styles = StyleSheet.create({
   picker: {
     color: '#000',
     width: 200
+  },
+  icon: {
+    width: 45,
+    paddingRight: 10, 
+    color: '#333333'
   }
 });
