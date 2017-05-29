@@ -18,15 +18,14 @@ import moment from 'moment';
 
 import { AppNavigator } from '../navigators/AppNavigator';
 
-const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Index'));
-
-function nav(state = initialNavState, action) {
+function nav(state, action) {
   const nextState = AppNavigator.router.getStateForAction(action, state);
   return nextState || state;
 }
 
 const initialState = {
-  isFetching: false
+  isFetching: false,
+  isAddingExpense: false
 }
 
 export const app = (state = initialState, action) => {
@@ -37,7 +36,7 @@ export const app = (state = initialState, action) => {
     case ADD_EXPENSE: {
       return {
         ...state,
-        isFetching: true
+        isAddingExpense: true
       }
     }
     case RECEIVE_EXPENSES: {
@@ -59,7 +58,7 @@ export const app = (state = initialState, action) => {
         ...state,
         error,
         showMessage: true,
-        isFetching: false
+        isAddingExpense: false
       }
     }
     case REQUEST_EXPENSES: {

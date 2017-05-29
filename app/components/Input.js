@@ -72,7 +72,7 @@ class Input extends Component {
             {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
           </Picker>
           <DatePicker
-            style={{width: 200}}
+            style={{width: 225}}
             date={this.props.input.expenseDate}
             mode="date"
             placeholder="select date"
