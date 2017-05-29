@@ -11,6 +11,7 @@ export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
 export const UPDATE_NEW_EXPENSE_NAME = 'UPDATE_NEW_EXPENSE_NAME';
 export const UPDATE_NEW_EXPENSE_CATEGORY = 'UPDATE_NEW_EXPENSE_CATEGORY';
 export const UPDATE_NEW_EXPENSE_COST = 'UPDATE_NEW_EXPENSE_COST';
+export const UPDATE_NEW_EXPENSE_DATE = 'UPADATE_NEW_EXPENSE_DATE';
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 
 export function addExpense(expense) {
@@ -97,6 +98,13 @@ export function updateNewExpenseCost(cost) {
   return {
     type: UPDATE_NEW_EXPENSE_COST,
     cost
+  }
+}
+
+export function updateNewExpenseDate(date) {
+  return {
+    type: UPDATE_NEW_EXPENSE_DATE,
+    date
   }
 }
 

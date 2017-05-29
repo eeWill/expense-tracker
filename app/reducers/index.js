@@ -11,8 +11,10 @@ import {
   UPDATE_NEW_EXPENSE_NAME,
   UPDATE_NEW_EXPENSE_CATEGORY,
   UPDATE_NEW_EXPENSE_COST,
-  SHOW_NOTIFICATION
+  SHOW_NOTIFICATION,
+  UPDATE_NEW_EXPENSE_DATE
 } from '../actions'
+import moment from 'moment';
 
 import { AppNavigator } from '../navigators/AppNavigator';
 
@@ -105,7 +107,8 @@ export const app = (state = initialState, action) => {
 initialInputState = {
   expenseName: '',
   expenseCategory: 0,
-  expenseCost: ''
+  expenseCost: '',
+  expenseDate: moment().format('YYYY-MM-DD')
 }
 
 export const input = (state = initialInputState, action) => {
@@ -128,6 +131,12 @@ export const input = (state = initialInputState, action) => {
       return {
         ...state,
         expenseCost: action.cost,
+      }
+    }
+    case UPDATE_NEW_EXPENSE_DATE: {
+      return {
+        ...state,
+        expenseDate: action.date
       }
     }
     default: {
