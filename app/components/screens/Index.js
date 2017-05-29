@@ -13,8 +13,8 @@ class Index extends Component {
   }
 
   componentWillMount() {
-    const { fetchServerData } = this.props;
-    fetchServerData();
+    const { fetchCategories } = this.props;
+    fetchCategories();
   }
 
   handleBackPress = () => {
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
   goTo: (route) => {
     dispatch(NavigationActions.navigate({ routeName: route }));
   },
-  fetchServerData: () => {
+  fetchCategories: () => {
     dispatch(actions.fetchCategories());
   },
   hideNotification: () => {
