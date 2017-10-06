@@ -6,7 +6,7 @@ import AppWithNavigationState from './app/navigators/AppNavigator.js';
 
 const store = configureStore();
 
-export default class ExpenseTracker extends Component {
+export default class expenseTrackerRN extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -16,4 +16,4 @@ export default class ExpenseTracker extends Component {
   }
 }
 
-AppRegistry.registerComponent('ExpenseTracker', () => ExpenseTracker);
+AppRegistry.registerComponent('expenseTrackerRN', () => expenseTrackerRN);

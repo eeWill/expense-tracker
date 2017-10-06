@@ -9,7 +9,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux'
-import { actionCreators } from './reducers/expenses.js'
 import * as actions from './actions'
 import { Input } from './components/Input.js';
 import { Header } from  './components/Header.js';
@@ -33,8 +32,7 @@ const navReducer = (state = initialState, action) => {
 };
 
 const appReducer = combineReducers({
-  nav: navReducer,
-  ...
+  nav: navReducer
 });
 
 

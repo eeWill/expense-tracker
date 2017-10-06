@@ -22,7 +22,7 @@ export function fetchCategoriesApi() {
     .catch(error => ({ error }))
 }
 
-export function* fetchExpenses() {
+export const fetchExpenses = function* fetchExpenses() {
   yield put(actions.requestExpenses());
   const expenses = yield call(fetchExpensesApi);
   yield put(actions.receiveExpenses(expenses))
@@ -63,7 +63,7 @@ export function addExpenseApi(expense) {
   .catch(error => error);
 }
 
-export function* addExpense(action) {
+export const addExpense = function* addExpense(action) {
    yield put(actions.addExpense(action.payload));
    try {
       const data = yield call(addExpenseApi, action.payload);
@@ -74,7 +74,7 @@ export function* addExpense(action) {
    }
 }
 
-export function* mySaga() {
+export const mySaga = function* mySaga() {
   yield takeEvery("FETCH_EXPENSES", fetchExpenses);
   yield takeEvery("ADD_EXPENSE_REQUEST", addExpense);
   yield takeEvery("FETCH_CATEGORIES", fetchCategories);
