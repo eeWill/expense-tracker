@@ -54,27 +54,35 @@ class Input extends Component {
 
     return (
         <View>
-          <TextInput
-            placeholder="Expense"
-            value={this.props.input.expenseName}
-            onChangeText={(name) => updateName(name)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Cost"
-            value={this.props.input.expenseCost}
-            keyboardType="numeric"
-            onChangeText={(cost) => updateCost(cost)}
-            style={styles.input}
-          />
-          <Picker
-            itemStyle={styles.picker}
-            selectedValue={this.props.input.expenseCategory}
-            onValueChange={(category) => updateCategory(category)}>
-            {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
-          </Picker>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Expense"
+              value={this.props.input.expenseName}
+              onChangeText={(name) => updateName(name)}
+              style={styles.input}
+              underlineColorAndroid="transparent" 
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Cost"
+              value={this.props.input.expenseCost}
+              keyboardType="numeric"
+              onChangeText={(cost) => updateCost(cost)}
+              style={styles.input}
+              underlineColorAndroid="transparent" 
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Picker
+              style={styles.picker}
+              selectedValue={this.props.input.expenseCategory}
+              onValueChange={(category) => updateCategory(category)}>
+              {categoryTypes.map((category, index) => <Picker.Item key={index} {...category} />)}
+            </Picker>
+          </View>
           <DatePicker
-            style={{width: 225}}
+            style={styles.datePicker}
             date={this.props.input.expenseDate}
             mode="date"
             placeholder="select date"
@@ -83,7 +91,14 @@ class Input extends Component {
             cancelBtnText="Cancel"
             iconComponent={this.calendarIcon()}
             customStyles={{
-  
+              dateInput: {
+                marginLeft: 15,
+                borderWidth: 0,
+              },
+              dateText: {
+                fontSize: 18,
+                color: '#234456'
+              }
             }}
             onDateChange={(date) => updateDate(date)}
           />          
@@ -136,17 +151,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(Input);
 const styles = StyleSheet.create({
   input: {
     height: 50,
-    width: 200,
-    color: '#000',
+    color: '#234456',
     borderColor: '#fff',
+    textAlign: 'center'
   },
   picker: {
-    color: '#000',
-    width: 200
+    color: '#234456',
+    width: 200,
+    alignSelf: 'center'
   },
   icon: {
     width: 45,
     paddingRight: 10, 
     color: '#333333'
+  },
+  datePicker: {
+    width: 230,
+    height: 45,
+    borderColor: '#14385c',
+    borderWidth: 1
+  },
+  inputContainer: {
+    borderColor: '#14385c',
+    borderWidth: 1,
+    marginBottom: 15
   }
 });
