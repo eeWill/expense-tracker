@@ -4,6 +4,7 @@ import { addNavigationHelpers, StackNavigator, TabNavigator, Text } from 'react-
 import Index from '../components/screens/Index';
 import Expenses from '../components/screens/Expenses';
 import Categories from '../components/screens/Categories';
+import Home from '../components/screens/Home';
 
 const navigationConfig = {
   initialRouteName: 'Root',
@@ -23,20 +24,28 @@ const navigationConfig = {
 
 
 const TabNav = TabNavigator({
+  HomeTab: {
+    screen: Home,
+    path: '/dashboard',
+    navigationOption: {
+      tabBarLabel: 'Home'
+    }
+  },
   MainTab: {
     screen: Index,
     path: '/',
     navigationOptions: {
-      tabBarLabel: 'Home'
+      tabBarLabel: 'Add Expense'
     },
   },
   ExpensesTab: {
     screen: Expenses,
     path: '/expenses',
     navigationOptions: {
-      tabBarLabel: 'Expenses'
+      tabBarLabel: 'Transactions'
     },
   },
+  /*
   Categories: {
     screen: Categories,
     path: '/categories',
@@ -44,6 +53,7 @@ const TabNav = TabNavigator({
       tabBarLabel: 'Categories'
     },
   },
+  */
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,
@@ -54,8 +64,11 @@ export const AppNavigator = StackNavigator({
   Root: {
     screen: TabNav,
   },
+  Home: {
+    screen: Home
+  },
   Index: {
-    screen: Index,
+    screen: Index
   },
   Expenses: {
     screen: Expenses

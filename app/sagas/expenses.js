@@ -1,8 +1,8 @@
 import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as actions from '../actions'
+import {baseUrl} from '../config.js';
 
-let baseUrl = "https://forte.evwill.com";
 
 export function fetchExpensesApi() {
   return fetch(baseUrl + "/expenses")

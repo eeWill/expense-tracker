@@ -30,7 +30,7 @@ class Expenses extends Component {
 
 Expenses.navigationOptions = ({ navigation }) => {
   return {
-    title: "Expenses",
+    title: "Transactions",
   }
 }
 
