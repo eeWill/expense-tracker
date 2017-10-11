@@ -1,27 +1,27 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator, TabNavigator, Text } from 'react-navigation';
-import Index from '../components/screens/Index';
+import AddExpense from '../components/screens/AddExpense';
 import Expenses from '../components/screens/Expenses';
 import Categories from '../components/screens/Categories';
 import Home from '../components/screens/Home';
+import { darkPrimaryColor, whiteColor } from '../colors.js';
 
 const navigationConfig = {
   initialRouteName: 'Root',
   headerMode: 'screen',
   navigationOptions: {
     headerStyle: {
-      backgroundColor: '#212121',
+      backgroundColor: darkPrimaryColor,
     },
     headerTitleStyle: {
-      color: '#FFFFFF'
+      color: whiteColor
     },
     headerBackTitleStyle: {
-      color: '#FFFFFF'
+      color: whiteColor
     }
   }
 }
-
 
 const TabNav = TabNavigator({
   HomeTab: {
@@ -32,7 +32,7 @@ const TabNav = TabNavigator({
     }
   },
   MainTab: {
-    screen: Index,
+    screen: AddExpense,
     path: '/',
     navigationOptions: {
       tabBarLabel: 'Add Expense'
@@ -45,19 +45,15 @@ const TabNav = TabNavigator({
       tabBarLabel: 'Transactions'
     },
   },
-  /*
-  Categories: {
-    screen: Categories,
-    path: '/categories',
-    navigationOptions: {
-      tabBarLabel: 'Categories'
-    },
-  },
-  */
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: false,
   swipeEnabled: false,
+  tabBarOptions: {
+    style: {
+      backgroundColor: darkPrimaryColor
+    }
+  }
 });
 
 export const AppNavigator = StackNavigator({
@@ -68,7 +64,7 @@ export const AppNavigator = StackNavigator({
     screen: Home
   },
   Index: {
-    screen: Index
+    screen: AddExpense
   },
   Expenses: {
     screen: Expenses

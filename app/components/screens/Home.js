@@ -1,27 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native'
+import { View, Text, TouchableHighlight } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { DashboardItem } from '../DashboardItem.js';
+import { primaryColor } from '../../colors.js';
 
 class Home extends Component {
 
+  onPressCharts() {
+    console.log('Charts Page');
+  }
+
   render () {
     return (
-      <View style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-start'}}>
+      <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={styles.dashboardItem}>
-              <Text style={styles.dashboardSubHeader}>Total Expenses: $845</Text>
+            <View style={styles.dashboardTextItem}>
+              <Text style={styles.dashboardHeader}>$845</Text>
+              <Text style={styles.dashboardSubHeader}>Total {"\n"} Expenses</Text>
             </View>
-            <View style={{...styles.dashboardItem, marginLeft: 0}}>
-              <Text style={styles.dashboardSubHeader}>Settings</Text>
+            <View style={styles.dashboardTextItem}>
+              <Text style={styles.dashboardHeader}>$1256</Text>
+              <Text style={styles.dashboardSubHeader}>Budget Remaining</Text>
             </View>
           </View>
         </View>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{...styles.dashboardItem, backgroundColor: '#008975'}}>
-              <Text style={styles.dashboardSubHeader}>Charts</Text>
-            </View>
+            <DashboardItem
+              onPress={this.onPressCharts}
+              text="Charts"
+              iconType="insert-chart" 
+            />
+            <DashboardItem
+              onPress={this.onPressCharts}
+              text="Reports"
+              iconType="assignment" 
+            />
+          </View>
+        </View>
+        <View style={styles.dashboardRow}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <DashboardItem
+              onPress={this.onPressCharts}
+              text="Categories"
+              iconType="view-list" 
+            />
+            <DashboardItem
+              onPress={this.onPressCharts}
+              text="Settings"
+              iconType="settings" 
+            />
           </View>
         </View>
       </View>
@@ -31,20 +61,35 @@ class Home extends Component {
 }
 
 const styles = {
-  dashboardItem: {
-    flex: 1, 
-    backgroundColor: '#00AA8D', 
-    margin: 5, 
-    marginBottom: 0
+  dashboardTextItem: {
+    flex: 1,
+    backgroundColor: '#FFF',
+    borderColor: primaryColor,
+    backgroundColor: '#EAEAEA',
+    borderWidth: 4,
+    margin: 10,
+    justifyContent: 'center', 
+    alignItems: 'center'
   },
   dashboardRow: {
-    height: 150,
+    height: 175,
   },
   dashboardSubHeader: {
-    color: '#FFF',
-    fontSize: 16,
-    padding: 5
-  }
+    color: '#333',
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 10,
+    textAlign: 'center'
+  },
+  dashboardHeader: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    color: '#333'
+  },
+  icon: {
+    width: 45,
+    color: '#FFF'
+  },
 }
 
 Home.navigationOptions = ({ navigation }) => {

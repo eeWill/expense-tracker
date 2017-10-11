@@ -8,7 +8,7 @@ import Input from './../Input';
 import moment from 'moment'; 
 import { addTimeout } from 'redux-timeout'
 
-class Index extends Component {
+class AddExpense extends Component {
 
   constructor(props) {
     super(props);
@@ -60,9 +60,9 @@ class Index extends Component {
 
 }
 
-Index.navigationOptions = ({ navigation }) => {
+AddExpense.navigationOptions = ({ navigation }) => {
   return {
-    title: "Expense Tracker",
+    title: "Add Expense",
   }
 }
 
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 12, 
-    backgroundColor: '#F0F8FF', 
     alignItems: 'center', 
     flexDirection: 'row', 
     justifyContent:'center'
@@ -127,5 +126,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(AddExpense);
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { TextInput, View, StyleSheet, Button, Picker } from 'react-native'
+import { TextInput, View, StyleSheet, Button, Picker, TouchableNativeFeedback, Text } from 'react-native'
 import DatePicker from 'react-native-datepicker'
 import { connect } from 'react-redux';
 import * as actions from './../actions';
 import moment from 'moment';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { whiteColor } from '../colors.js';
 
 class Input extends Component {
 
@@ -103,6 +104,13 @@ class Input extends Component {
             onDateChange={(date) => updateDate(date)}
           />          
           <View style={{padding: 50}}>
+          <TouchableNativeFeedback
+              onPress={() => this.addExpense()}
+              background={TouchableNativeFeedback.SelectableBackground()}>
+            <View style={{width: 150, height: 100, backgroundColor: 'red'}}>
+              <Text style={{margin: 30}}>Button</Text>
+            </View>
+          </TouchableNativeFeedback>
             <Button
               onPress={() => this.addExpense()}
               title="Submit Expense"
@@ -152,7 +160,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     color: '#234456',
-    borderColor: '#fff',
+    borderColor: whiteColor,
     textAlign: 'center'
   },
   picker: {
