@@ -26,6 +26,8 @@ export const fetchExpenses = function* fetchExpenses() {
   yield put(actions.requestExpenses());
   const expenses = yield call(fetchExpensesApi);
   yield put(actions.receiveExpenses(expenses))
+  yield put(actions.calculateMonthlyTotal(expenses));
+  yield put(actions.calculateMonthlyBudgetRemaining());
 }
 
 export function* fetchCategories() {

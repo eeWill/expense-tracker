@@ -13,6 +13,8 @@ export const UPDATE_NEW_EXPENSE_CATEGORY = 'UPDATE_NEW_EXPENSE_CATEGORY';
 export const UPDATE_NEW_EXPENSE_COST = 'UPDATE_NEW_EXPENSE_COST';
 export const UPDATE_NEW_EXPENSE_DATE = 'UPADATE_NEW_EXPENSE_DATE';
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+export const CALCULATE_MONTHLY_TOTAL = 'CALCULATE_MONTHLY_TOTAL';
+export const CALCULATE_MONTHLY_BUDGET_REMAINING = 'CALCULATE_MONTHLY_BUDGET_REMAINING';
 
 export function addExpense(expense) {
   return {
@@ -112,5 +114,17 @@ export function showNotification(message) {
   return {
     type: SHOW_NOTIFICATION,
     message
+  }
+}
+
+export function calculateMonthlyTotal() {
+  return {
+    type: CALCULATE_MONTHLY_TOTAL
+  }
+}
+
+export function calculateMonthlyBudgetRemaining() {
+  return {
+    type: CALCULATE_MONTHLY_BUDGET_REMAINING
   }
 }

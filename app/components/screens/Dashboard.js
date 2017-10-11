@@ -19,17 +19,17 @@ class Dashboard extends Component {
   };
 
   render () {
-    let {goTo} = this.props;
+    let {goTo, currentMonthTotal, budgetRemaining} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
             <DashboardText
-              valueText="$845"
+              valueText={'$' + currentMonthTotal}
               labelText={`Total \n Expenses`}
             />
             <DashboardText
-              valueText="$1256"
+              valueText={'$' + budgetRemaining}
               labelText={`Budget \n Remaining`}
             />
           </View>
@@ -81,6 +81,8 @@ const styles = {
 
 
 const mapStateToProps = (state) => ({
+  currentMonthTotal: state.app.currentMonthTotal,
+  budgetRemaining: state.app.budgetRemaining,
   expenses: state.app.expenses,
   isFetching: state.app.isFetching
 });

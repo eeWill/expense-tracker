@@ -12,9 +12,12 @@ import {
   UPDATE_NEW_EXPENSE_CATEGORY,
   UPDATE_NEW_EXPENSE_COST,
   SHOW_NOTIFICATION,
-  UPDATE_NEW_EXPENSE_DATE
+  UPDATE_NEW_EXPENSE_DATE,
+  CALCULATE_MONTHLY_TOTAL,
+  CALCULATE_MONTHLY_BUDGET_REMAINING
 } from '../actions'
 import moment from 'moment';
+import {monthlyBudget} from '../config.js';
 
 import { AppNavigator } from '../navigators/AppNavigator';
 
@@ -25,7 +28,9 @@ function nav(state, action) {
 
 const initialState = {
   isFetching: false,
-  isAddingExpense: false
+  isAddingExpense: false,
+  currentMonthTotal: 0,
+  budgetRemaining: 0
 }
 
 export const app = (state = initialState, action) => {
@@ -97,6 +102,18 @@ export const app = (state = initialState, action) => {
         categories: action.categories,
       }
     }
+    case CALCULATE_MONTHLY_TOTAL: {
+      return {
+        ...state,
+        currentMonthTotal: calculateMonthlyTotal(action.expenses)
+      }
+    }
+    case CALCULATE_MONTHLY_BUDGET_REMAINING: {
+      return {
+        ...state,
+        budgetRemaining: calculateMonthlyBudgetRemaining(state.currentMonthTotal)
+      }
+    }
     default: {
       return state
     }
@@ -157,5 +174,14 @@ const AppReducer = combineReducers({
   app,
   input
 });
+
+function calculateMonthlyTotal (expenses) {
+  return 897;
+}
+
+function calculateMonthlyBudgetRemaining (currentMonthTotal) {
+  let remainingAmount = parseInt(monthlyBudget) - currentMonthTotal;
+  return remainingAmount
+}
 
 export default AppReducer;
