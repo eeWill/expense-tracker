@@ -104,13 +104,6 @@ class Input extends Component {
             onDateChange={(date) => updateDate(date)}
           />          
           <View style={{padding: 50}}>
-          <TouchableNativeFeedback
-              onPress={() => this.addExpense()}
-              background={TouchableNativeFeedback.SelectableBackground()}>
-            <View style={{width: 150, height: 100, backgroundColor: 'red'}}>
-              <Text style={{margin: 30}}>Button</Text>
-            </View>
-          </TouchableNativeFeedback>
             <Button
               onPress={() => this.addExpense()}
               title="Submit Expense"

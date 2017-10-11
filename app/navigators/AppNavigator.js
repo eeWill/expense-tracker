@@ -11,15 +11,13 @@ const navigationConfig = {
   initialRouteName: 'Root',
   headerMode: 'screen',
   navigationOptions: {
+    headerTintColor: whiteColor,
     headerStyle: {
       backgroundColor: darkPrimaryColor,
     },
     headerTitleStyle: {
       color: whiteColor
     },
-    headerBackTitleStyle: {
-      color: whiteColor
-    }
   }
 }
 
@@ -27,9 +25,6 @@ const TabNav = TabNavigator({
   HomeTab: {
     screen: Home,
     path: '/dashboard',
-    navigationOption: {
-      tabBarLabel: 'Home'
-    }
   },
   MainTab: {
     screen: AddExpense,

@@ -4,16 +4,16 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { primaryColor, whiteColor } from '../colors.js';
 
 
-class DashboardItem extends Component {
+class DashboardButton extends Component {
   render() {
     let {iconType, text, onPress} = this.props;
 
     return (
       <TouchableHighlight 
-      style={{margin: 10, flex: 1}}
-      underlayColor={whiteColor}
-      activeOpacity={.8}
-      onPress={onPress}>
+        style={{margin: 10, flex: 1}}
+        underlayColor={whiteColor}
+        activeOpacity={.8}
+        onPress={onPress}>
         <View style={{...styles.dashboardItem, margin: 0}}>
           <MaterialIcons
             name={iconType}
@@ -48,4 +48,4 @@ const styles = {
   },
 }
 
-export {DashboardItem}
+export {DashboardButton}

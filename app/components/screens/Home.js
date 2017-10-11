@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TouchableHighlight } from 'react-native';
+import { NavigationActions } from 'react-navigation'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { DashboardItem } from '../DashboardItem.js';
-import { primaryColor } from '../../colors.js';
+import { DashboardButton } from '../DashboardButton.js';
+import { DashboardText } from '../DashboardText.js';
+import { primaryColor, whiteColor } from '../../colors.js';
 
 class Home extends Component {
 
@@ -11,29 +13,35 @@ class Home extends Component {
     console.log('Charts Page');
   }
 
+  static navigationOptions = {
+    title: "Expense Tracker",
+    tabBarLabel: "Dashboard"
+  };
+
   render () {
+    let {goTo} = this.props;
     return (
       <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={styles.dashboardTextItem}>
-              <Text style={styles.dashboardHeader}>$845</Text>
-              <Text style={styles.dashboardSubHeader}>Total {"\n"} Expenses</Text>
-            </View>
-            <View style={styles.dashboardTextItem}>
-              <Text style={styles.dashboardHeader}>$1256</Text>
-              <Text style={styles.dashboardSubHeader}>Budget Remaining</Text>
-            </View>
+            <DashboardText
+              valueText="$845"
+              labelText={`Total \n Expenses`}
+            />
+            <DashboardText
+              valueText="$1256"
+              labelText={`Budget \n Remaining`}
+            />
           </View>
         </View>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <DashboardItem
+            <DashboardButton
               onPress={this.onPressCharts}
               text="Charts"
               iconType="insert-chart" 
             />
-            <DashboardItem
+            <DashboardButton
               onPress={this.onPressCharts}
               text="Reports"
               iconType="assignment" 
@@ -42,12 +50,12 @@ class Home extends Component {
         </View>
         <View style={styles.dashboardRow}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <DashboardItem
-              onPress={this.onPressCharts}
+            <DashboardButton
+              onPress={() => goTo('Categories')}
               text="Categories"
               iconType="view-list" 
             />
-            <DashboardItem
+            <DashboardButton
               onPress={this.onPressCharts}
               text="Settings"
               iconType="settings" 
@@ -61,46 +69,26 @@ class Home extends Component {
 }
 
 const styles = {
-  dashboardTextItem: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    borderColor: primaryColor,
-    backgroundColor: '#EAEAEA',
-    borderWidth: 4,
-    margin: 10,
-    justifyContent: 'center', 
-    alignItems: 'center'
-  },
   dashboardRow: {
     height: 175,
   },
-  dashboardSubHeader: {
-    color: '#333',
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 10,
-    textAlign: 'center'
-  },
-  dashboardHeader: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    color: '#333'
-  },
   icon: {
     width: 45,
-    color: '#FFF'
+    color: whiteColor
   },
 }
 
-Home.navigationOptions = ({ navigation }) => {
-  return {
-    title: "Dashboard",
-  }
-}
+
 
 const mapStateToProps = (state) => ({
   expenses: state.app.expenses,
   isFetching: state.app.isFetching
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+  goTo: (route) => {
+    dispatch(NavigationActions.navigate({ routeName: route }));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
