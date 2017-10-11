@@ -3,7 +3,6 @@ import { Text, View, StyleSheet } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { primaryColor, whiteColor, backgroundColor } from '../colors.js';
 
-
 class DashboardText extends Component {
   render() {
     let {valueText, labelText} = this.props;

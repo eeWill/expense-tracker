@@ -7,7 +7,7 @@ import { DashboardButton } from '../DashboardButton.js';
 import { DashboardText } from '../DashboardText.js';
 import { primaryColor, whiteColor } from '../../colors.js';
 
-class Home extends Component {
+class Dashboard extends Component {
 
   onPressCharts() {
     console.log('Charts Page');
@@ -91,4 +91,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

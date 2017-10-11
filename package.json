@@ -4,6 +4,8 @@
   "private": true,
   "devDependencies": {
     "babel-preset-react-native": "^3.0.2",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "jest-expo": "^21.0.2",
     "react-native-scripts": "1.5.0",
     "react-test-renderer": "16.0.0-alpha.12"
@@ -17,12 +19,19 @@
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "dependencies": {
     "expo": "^21.0.0",
+    "jest-enzyme": "^4.0.1",
+    "jest-serializer-enzyme": "^1.0.0",
     "moment": "^2.18.1",
     "react": "^16.0.0-alpha.12",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.0.0",
     "react-native": "^0.48.4",
     "react-native-datepicker": "^1.6.0",
     "react-native-vector-icons": "^4.4.0",

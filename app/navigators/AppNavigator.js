@@ -4,7 +4,7 @@ import { addNavigationHelpers, StackNavigator, TabNavigator, Text } from 'react-
 import AddExpense from '../components/screens/AddExpense';
 import Expenses from '../components/screens/Expenses';
 import Categories from '../components/screens/Categories';
-import Home from '../components/screens/Home';
+import Dashboard from '../components/screens/Dashboard';
 import { darkPrimaryColor, whiteColor } from '../colors.js';
 
 const navigationConfig = {
@@ -22,8 +22,8 @@ const navigationConfig = {
 }
 
 const TabNav = TabNavigator({
-  HomeTab: {
-    screen: Home,
+  DashboardTab: {
+    screen: Dashboard,
     path: '/dashboard',
   },
   MainTab: {
@@ -55,8 +55,8 @@ export const AppNavigator = StackNavigator({
   Root: {
     screen: TabNav,
   },
-  Home: {
-    screen: Home
+  Dashboard: {
+    screen: Dashboard
   },
   Index: {
     screen: AddExpense
