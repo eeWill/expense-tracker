@@ -117,9 +117,10 @@ export function showNotification(message) {
   }
 }
 
-export function calculateMonthlyTotal() {
+export function calculateMonthlyTotal(expenses) {
   return {
-    type: CALCULATE_MONTHLY_TOTAL
+    type: CALCULATE_MONTHLY_TOTAL,
+    expenses
   }
 }
 

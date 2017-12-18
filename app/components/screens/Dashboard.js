@@ -78,8 +78,6 @@ const styles = {
   },
 }
 
-
-
 const mapStateToProps = (state) => ({
   currentMonthTotal: state.app.currentMonthTotal,
   budgetRemaining: state.app.budgetRemaining,

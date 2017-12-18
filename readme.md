@@ -14,7 +14,7 @@ Expenses and purchases are entered in the app, and are sent to a remote server o
 
 Project can be run using `react-native run-android`, if an emulator or device is currently running or attached.
 
-# Upcoming
+## Upcoming
 
 Project is still in its early stages, basic expense tracking functionality is currently working. 
 

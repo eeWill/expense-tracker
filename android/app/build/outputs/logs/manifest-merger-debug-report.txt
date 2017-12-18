@@ -68,7 +68,7 @@ ADDED from /Users/evan/projects/expenseTrackerRN/android/app/src/main/AndroidMan
 	android:label
 		ADDED from /Users/evan/projects/expenseTrackerRN/android/app/src/main/AndroidManifest.xml:21:9-41
 	android:windowSoftInputMode
-		ADDED from /Users/evan/projects/expenseTrackerRN/android/app/src/main/AndroidManifest.xml:23:9-51
+		ADDED from /Users/evan/projects/expenseTrackerRN/android/app/src/main/AndroidManifest.xml:23:9-48
 	android:configChanges
 		ADDED from /Users/evan/projects/expenseTrackerRN/android/app/src/main/AndroidManifest.xml:22:9-79
 	android:name

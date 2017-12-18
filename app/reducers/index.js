@@ -176,7 +176,12 @@ const AppReducer = combineReducers({
 });
 
 function calculateMonthlyTotal (expenses) {
-  return 897;
+  totalCost = 0
+  console.log(expenses);
+  for (let expense of expenses) {
+    totalCost = totalCost + parseInt(expense.cost);
+  }
+  return totalCost;
 }
 
 function calculateMonthlyBudgetRemaining (currentMonthTotal) {
