@@ -70,7 +70,9 @@ export const addExpense = function* addExpense(action) {
    yield put(actions.addExpense(action.payload));
    try {
       const data = yield call(addExpenseApi, action.payload);
-      yield put({type: "ADD_EXPENSE_COMPLETED", payload: data})
+      yield put({type: "ADD_EXPENSE_COMPLETED", payload: data});
+      const expenses = yield call(fetchExpensesApi);
+      yield put(actions.receiveExpenses(expenses))
    } catch (error) {
       console.log(error);
       yield call({type: "ADD_EXPENSE_FAILURE", error});

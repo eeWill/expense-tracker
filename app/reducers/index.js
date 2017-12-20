@@ -18,7 +18,6 @@ import {
 } from '../actions'
 import moment from 'moment';
 import {monthlyBudget} from '../config.js';
-
 import { AppNavigator } from '../navigators/AppNavigator';
 
 function nav(state, action) {
@@ -47,7 +46,7 @@ export const app = (state = initialState, action) => {
     case RECEIVE_EXPENSES: {
       return {
         ...state,
-        expenses: action.expenses,
+        expenses: sortExpensesByDate(action.expenses),
         isFetching: false,
         lastUpdated: action.receivedAt
       }
@@ -182,6 +181,15 @@ function calculateMonthlyTotal (expenses) {
     totalCost = totalCost + parseInt(expense.cost);
   }
   return totalCost;
+}
+
+function sortExpensesByDate (expenses) {
+
+  expenses.sort(function(a,b) {
+      return moment(b.purchase_date) - moment(a.purchase_date);
+  });
+
+  return expenses;
 }
 
 function calculateMonthlyBudgetRemaining (currentMonthTotal) {
