@@ -1,5 +1,5 @@
-import { takeEvery, takeLatest } from 'redux-saga';
-import { call, put } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../actions'
 import {baseUrl} from '../config.js';
 
@@ -73,6 +73,8 @@ export const addExpense = function* addExpense(action) {
       yield put({type: "ADD_EXPENSE_COMPLETED", payload: data});
       const expenses = yield call(fetchExpensesApi);
       yield put(actions.receiveExpenses(expenses))
+      yield put(actions.calculateMonthlyTotal(expenses));
+      yield put(actions.calculateMonthlyBudgetRemaining());
    } catch (error) {
       console.log(error);
       yield call({type: "ADD_EXPENSE_FAILURE", error});

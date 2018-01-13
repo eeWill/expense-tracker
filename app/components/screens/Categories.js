@@ -2,25 +2,36 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, TouchableHighlight, BackAndroid } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation';
 
 
 class Categories extends Component {
 
   keyExtractor = (category, index) => category.id;
-
-  renderItem = ({item}) => (
+  
+  renderItem = ({item, goTo}) => (
     <View style={styles.row}>
-      <Text style={styles.expenseCategory}>{item.name}</Text>
+      <TouchableHighlight 
+        style={styles.expenseCategory}
+        onPress={() => goTo('Category')}>
+          <Text>{item.name}</Text>
+        </TouchableHighlight>
     </View>
   );
 
   render() {
-    const {categories} = this.props;
+    const {categories, goTo} = this.props;
     return (
       <FlatList
         data={categories}
         keyExtractor={this.keyExtractor}
-        renderItem={this.renderItem}
+        renderItem={({item}) =>  <View style={styles.row}>
+        <TouchableHighlight 
+          style={styles.expenseCategory}
+          onPress={() => goTo('Category')}>
+            <Text>{item.name}</Text>
+          </TouchableHighlight>
+      </View>}
       />
     )
   }
@@ -37,6 +48,14 @@ const mapStateToProps = (state) => ({
   categories: state.app.categories,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  goTo: (route) => {
+    dispatch(NavigationActions.navigate({ routeName: route }));
+  }
+});
+
+
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
@@ -48,5 +67,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStateToProps)(Categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
 

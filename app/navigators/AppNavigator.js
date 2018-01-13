@@ -5,6 +5,7 @@ import AddExpense from '../components/screens/AddExpense';
 import Expenses from '../components/screens/Expenses';
 import Categories from '../components/screens/Categories';
 import Dashboard from '../components/screens/Dashboard';
+import Category from '../components/screens/Category';
 import { darkPrimaryColor, whiteColor } from '../colors.js';
 
 const navigationConfig = {
@@ -66,6 +67,9 @@ export const AppNavigator = StackNavigator({
   },
   Categories: {
     screen: Categories
+  },
+  Category: {
+    screen: Category
   }
 }, navigationConfig);
 
